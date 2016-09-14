@@ -1,7 +1,11 @@
 import java.util.*;
 
 /**
- *   [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+ *   Notes: I began this problem with a nested loop approach where I would iterate through and check for mergeable
+ *   meetings. I began to run into problems when merged meetings could still be merged again.
+ *   I struggled through a couple of cases including considering some recursion.
+ *   I ended up sorting the array by start date and then removing merged items from the initial array.
+ *   This allowed me to both merge already merged items and keep my place in the array.
  */
 
 public class HiCal {
