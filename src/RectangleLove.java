@@ -1,5 +1,7 @@
 /**
- * Created by nathansass on 9/15/16.
+ * This problem finds the interesections between rectangles
+ * I completed it pretty easily. I first made sure that my solution would make sense given a variety of rectangle orientations.
+ * Then I coded this up. Next steps would be to modularize the minX max x type thing.
  */
 public class RectangleLove {
 
