@@ -8,8 +8,6 @@ public class CoinsDynamic {
         int[] denom = {1,2,3};
 
         System.out.println(new CoinsDynamic().changePossibilitiesBottomUp(amount, denom));
-
-
     }
 
     public int changePossibilitiesBottomUp(int amount, int[] denominations) {

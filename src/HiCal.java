@@ -40,6 +40,7 @@ public class HiCal {
                 newMeeting.startTime = meeting1.startTime;
                 newMeeting.endTime = Math.max(meeting1.endTime, meeting2.endTime);
                 meetingsArr.add(i, newMeeting);
+                // Doesn't incremenet so it will check the merged meeting with a new meeting object
             } else {
                 i+= 1;
             }
