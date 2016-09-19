@@ -3,6 +3,8 @@ import java.util.ArrayList;
 /**
  * I began by learning a bit about binary trees. I then went for a greedy and recursion based approach where I would keep track of the depths
  * and then return them all in an array. I would then parse this array and find the difference for max and min values.
+ *
+ * Things to consider Breadth first vs. depth first
  */
 public class SuperbalancedBinaryTree {
     public static void main(String[] args) {
