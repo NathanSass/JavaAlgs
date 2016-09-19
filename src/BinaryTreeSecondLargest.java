@@ -23,12 +23,45 @@ public class BinaryTreeSecondLargest {
         n200.left = n150;
         n200.right = n250;
 
-        System.out.println(new BinaryTreeSecondLargest().findSecondLargest(n100));
+//        System.out.println(new BinaryTreeSecondLargest().findSecondLargest_greedy(n100));
+        System.out.println(new BinaryTreeSecondLargest().findSecondLargest_Recursive(n100));
 
 
     }
 
-    public int findSecondLargest(BinaryTreeNode treeRoot) {
+    public Integer findLargest(BinaryTreeNode node) {
+        if (node.right != null) {
+            return findLargest(node.right);
+        }
+
+        return node.value;
+    }
+
+    public Integer findSecondLargest_Recursive(BinaryTreeNode treeNode) {
+
+        // Case: Empty tree
+        if(treeNode == null) {
+            return null;
+        }
+
+        // Case: Second to last value in a balanced tree
+        if(treeNode.right != null
+                && treeNode.right.left == null
+                && treeNode.right.right == null ) {
+            return treeNode.value;
+        }
+
+        // Case: The largest value has a left subtree
+        if (treeNode.right == null &&
+                treeNode.left != null) {
+            return findLargest(treeNode.left);
+        }
+
+        return findSecondLargest_Recursive(treeNode.right);
+
+    }
+
+    public int findSecondLargest_greedy(BinaryTreeNode treeRoot) {
         Stack<BinaryTreeNode> nodes = new Stack<>();
         int highest = treeRoot.value;
         int secondHighest = Integer.MIN_VALUE;
