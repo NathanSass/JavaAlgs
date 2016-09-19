@@ -1,3 +1,4 @@
+import javax.xml.soap.Node;
 import java.util.Stack;
 
 /**
@@ -27,36 +28,43 @@ public class ValidBinarySearchTree {
     }
 
     public boolean isValid(BinaryTreeNode treeRoot) {
-        Stack<BinaryTreeNode> nodes = new Stack<>();
-        nodes.push(treeRoot);
+        Stack<NodeBounds> nodes = new Stack<>();
+        nodes.push(new NodeBounds(treeRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 
         while (!nodes.empty()) {
-            BinaryTreeNode node = nodes.pop();
+            NodeBounds nodeBounds = nodes.pop();
+            BinaryTreeNode node = nodeBounds.node;
+            int lowerBound = nodeBounds.lowerBound;
+            int upperBound = nodeBounds.upperBound;
 
-
-            if (node.left != null &&
-                    (node.left.value > node.value)){
+            // if this node is invalid, we return false right away
+            if ((node.value < lowerBound) || (node.value > upperBound)) {
                 return false;
             }
-
-            if (node.right != null &&
-                    node.right.value < node.value) {
-                return false;
-            }
-
-
 
             if (node.left != null) {
-                nodes.push(node.left);
+                nodes.push(new NodeBounds(node.left, lowerBound, node.value));
             }
 
             if (node.right != null) {
-                nodes.push(node.right);
+                nodes.push(new NodeBounds(node.right, node.value, upperBound));
             }
 
 
         }
         return true;
+    }
+
+    public class NodeBounds {
+        BinaryTreeNode node;
+        int lowerBound;
+        int upperBound;
+
+        public NodeBounds(BinaryTreeNode node, int lowerBound, int upperBound) {
+            this.node = node;
+            this.lowerBound = lowerBound;
+            this.upperBound = upperBound;
+        }
     }
 
 
@@ -80,4 +88,37 @@ public class ValidBinarySearchTree {
             return this.right;
         }
     }
+
+//    public boolean isValid(BinaryTreeNode treeRoot) {
+//        Stack<BinaryTreeNode> nodes = new Stack<>();
+//        nodes.push(treeRoot);
+//
+//        while (!nodes.empty()) {
+//            BinaryTreeNode node = nodes.pop();
+//
+//
+//            if (node.left != null &&
+//                    (node.left.value > node.value)){
+//                return false;
+//            }
+//
+//            if (node.right != null &&
+//                    node.right.value < node.value) {
+//                return false;
+//            }
+//
+//
+//
+//            if (node.left != null) {
+//                nodes.push(node.left);
+//            }
+//
+//            if (node.right != null) {
+//                nodes.push(node.right);
+//            }
+//
+//
+//        }
+//        return true;
+//    }
 }
