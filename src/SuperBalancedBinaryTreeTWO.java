@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -17,14 +16,21 @@ public class SuperBalancedBinaryTreeTWO {
 
     public static boolean isBalanced(BinaryTreeNode root) {
         Stack<BinaryTreeNode> nodes = new Stack<>();
+        root.lowerBound = Integer.MIN_VALUE;
+        root.upperBound = Integer.MAX_VALUE;
         nodes.push(root);
 
         while (nodes.size() > 0) {
             BinaryTreeNode node = nodes.pop();
 
+            // if it is invalid
+            if (node.value <= node.lowerBound || node.value >= node.upperBound)
+                return false;
+
             // evaluate left
             if (node.left != null) {
                 if (node.left.value < node.value) {
+                    node.left.lowerBound = node.lowerBound;
                     nodes.push(node.left);
                 } else {
                     return false;
@@ -34,6 +40,7 @@ public class SuperBalancedBinaryTreeTWO {
             // evaluate right
             if (node.right != null) {
                 if (node.right.value > node.value) {
+                    node.right.upperBound = node.upperBound;
                     nodes.push(node.right);
                 } else {
                     return false;
